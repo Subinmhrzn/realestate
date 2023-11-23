@@ -296,7 +296,7 @@ export default function CreateListing() {
                   required
                   className='p-3 border border-gray-300 rounded-lg'
                   onChange={handleChange}
-                  value={formData.discountPrice}
+                  value={formData.discountedPrice}
                 />
                 <div className='flex flex-col items-center'>
                   <p>Discounted price</p>
