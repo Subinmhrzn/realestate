@@ -1,3 +1,4 @@
+import { query } from 'express';
 import Listing from '../models/listing.model.js';
 import { errorHandler } from '../utils/error.js';
 
@@ -66,6 +67,7 @@ export const getListings = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
+
     let offer = req.query.offer;
 
     if (offer === undefined || offer === 'false') {
@@ -97,13 +99,15 @@ export const getListings = async (req, res, next) => {
     const order = req.query.order || 'desc';
 
     const listings = await Listing.find({
-      name : { $regex: searchTerm, $options: 'i' },
-      //  offer
-      // furnished,
-      // parking,
-      // type,
+      name: { $regex: searchTerm, $options: 'i' },
+        // offer,
+       furnished,
+      parking,
+       type,
     })
-      .sort([[sort,order]]).limit(limit).skip(startIndex);
+      .sort([[sort,order]])
+      .limit(limit)
+      .skip(startIndex);
 
     return res.status(200).json(listings);
   } catch (error) {
