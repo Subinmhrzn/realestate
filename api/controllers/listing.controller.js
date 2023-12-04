@@ -67,11 +67,9 @@ export const getListings = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
 
-    let offer = req.query.offer;
+    // let offer = req.query.offer;
 
-    if (offer === undefined || offer === 'false') {
-      offer = { $in: [false, true] };
-    }
+  
 
     let furnished = req.query.furnished;
 
@@ -84,6 +82,9 @@ export const getListings = async (req, res, next) => {
     if (parking === undefined || parking === 'false') {
       parking = { $in: [false, true] };
     }
+    /*if (offer === undefined || offer === 'false') {
+      offer = { $in: [false, true] };
+    }*/
 
     let type = req.query.type;
 
@@ -99,7 +100,7 @@ export const getListings = async (req, res, next) => {
 
     const listings = await Listing.find({
       name: { $regex: searchTerm, $options: 'i' },
-        // offer,
+      //  offer,
        furnished,
       parking,
        type,
